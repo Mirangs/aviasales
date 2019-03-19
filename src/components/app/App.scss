@@ -1,0 +1,11 @@
+.app {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 50px 100px 100px;
+
+  &__logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+  }
+}

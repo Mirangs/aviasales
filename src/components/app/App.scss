@@ -1,11 +1,24 @@
 .app {
+  position: relative;
   max-width: 1024px;
   margin: 0 auto;
   padding: 50px 100px 100px;
+
+  &__header {
+    margin-bottom: 50px;
+  }
 
   &__logo {
     width: 60px;
     height: 60px;
     margin: 0 auto;
+  }
+
+  .page-content {
+    position: relative;
+    width: 570px;
+    height: 200px;
+    margin-left: auto;
+    outline: 1px solid black;
   }
 }

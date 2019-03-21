@@ -1,0 +1,28 @@
+.btn {
+  position: relative;
+  padding: 10px 15px;
+  background-color: #FFF;
+  border: 1px solid #D2D5D6;
+  color: #2196F3;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #F2FCFF;
+    border-color: #64B5F5;
+  }
+  
+  &[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+  
+  &.active {
+    background-color: #2196F3;
+    color: #FFF;
+    box-shadow: 0px 0 2px 0px #C0C0C0;
+  }
+}

@@ -5,6 +5,7 @@ import Sidebar from '../sidebar/Sidebar';
 import TicketsList from '../ticketsList/TicketsList';
 
 const BASE_URL = 'http://localhost:3000/tickets';
+let initialTickets;
 
 class App extends Component {
   state = {
@@ -27,30 +28,62 @@ class App extends Component {
     this.setState({
       tickets: data
     });
+    initialTickets = data;
+  }
+
+  filterTickets = () => {
+    const tickets = initialTickets;
+    const { stops } = this.state.filter;
+
+    let newTickets = [];
+
+    for (let i in stops) {
+      if (i === 'all' && stops[i]) {
+        this.setState({
+          tickets: initialTickets
+        });
+        return;
+      } else {
+        if (stops[i]) {
+          const filter = tickets.filter(ticket => ticket.stops === +i);
+          newTickets.push(...filter);
+        }
+      }
+    }
+
+    this.setState({
+      tickets: newTickets
+    });
   }
 
   onButtonClick = (evt) => {
     evt.preventDefault();
     const text = evt.target.textContent;
 
-    const newFilter = Object.assign({}, this.state.filter, { currency: text });
-
-    this.setState(newFilter);
-  }
-
-  onCheckboxChange = evt => {
-    const { checked, name } = evt.target;
-
     this.setState(prevState => ({
       filter: {
-        currency: prevState.filter.currency,
-        stops: Object.assign({}, this.state.filter.stops, { [name]: checked }),
+        currency: text,
+        stops: prevState.filter.stops,
       }
     }));
   }
 
-  componentDidMount() {
-    this.getData();
+  onCheckboxChange = async evt => {
+    const { checked, name } = evt.target;
+
+    await this.setState(prevState => ({
+      filter: {
+        currency: prevState.filter.currency,
+        stops: Object.assign({}, this.state.filter.stops, { [name]: checked }),
+      },
+    }));
+
+    await this.filterTickets();
+  }
+
+  async componentDidMount() {
+    await this.getData();
+    await this.filterTickets();
   }
   
   render() {

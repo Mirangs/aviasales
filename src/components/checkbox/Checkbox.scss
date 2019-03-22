@@ -43,6 +43,7 @@
   &:hover::after {
     content: 'Только';
     position: absolute;
+    font-weight: bold;
     top: 50%;
     right: -13px;
     font-size: 12px;

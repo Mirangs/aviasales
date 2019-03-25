@@ -4,7 +4,7 @@ import './App.scss';
 import Sidebar from '../sidebar/Sidebar';
 import TicketsList from '../ticketsList/TicketsList';
 
-const BASE_URL = 'http://localhost:3000/tickets';
+const BASE_URL = 'https://my-json-server.typicode.com/Mirangs/aviasales/db';
 let initialTickets = [];
 
 class App extends Component {
@@ -26,9 +26,9 @@ class App extends Component {
     const api_call = await fetch(BASE_URL);
     const data = await api_call.json();
     this.setState({
-      tickets: data
+      tickets: data.tickets
     });
-    initialTickets = data;
+    initialTickets = data.tickets;
   }
 
   filterTickets = () => {

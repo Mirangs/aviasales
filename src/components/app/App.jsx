@@ -11,7 +11,7 @@ class App extends Component {
   state = {
     tickets: [],
     filter: {
-      currency: 'EUR',
+      currency: 'RUB',
       stops: {
         'all': false,
         '0': true,

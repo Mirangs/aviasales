@@ -1,5 +1,5 @@
 .sidebar {
-  position: absolute;
+
   padding: 20px;
   top: 160px;
   left: 100px;
@@ -19,5 +19,17 @@
 
   .check-group {
     width: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar {
+    left: 50px;
+  }
+}
+
+@media (max-width: 730px) {
+  .sidebar {
+    margin-bottom: 30px;
   }
 }

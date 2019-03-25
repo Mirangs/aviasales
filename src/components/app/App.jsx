@@ -5,13 +5,13 @@ import Sidebar from '../sidebar/Sidebar';
 import TicketsList from '../ticketsList/TicketsList';
 
 const BASE_URL = 'http://localhost:3000/tickets';
-let initialTickets;
+let initialTickets = [];
 
 class App extends Component {
   state = {
     tickets: [],
     filter: {
-      currency: 'RUB',
+      currency: 'EUR',
       stops: {
         'all': false,
         '0': true,
@@ -87,7 +87,7 @@ class App extends Component {
   }
   
   render() {
-    const { tickets, filter } = this.state;
+    const { tickets, filter, currencyRate, filter: { currency } } = this.state;
 
     return (
       <div className="app">
@@ -100,7 +100,7 @@ class App extends Component {
         <Sidebar filter={filter} onButtonClick={this.onButtonClick} onCheckboxChange={this.onCheckboxChange}/>
 
         <main className="page-content">
-          <TicketsList tickets={tickets}/>
+          <TicketsList tickets={tickets} currencyRate={currencyRate} currency={currency}/>
         </main>
       </div>
     );

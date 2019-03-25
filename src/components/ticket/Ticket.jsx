@@ -10,12 +10,12 @@ const dataOptions = {
   timezone: 'UTC',
 }
 
-const Ticket = ({ price, departure_time, arrival_time, origin, origin_name, destination, destination_name, departure_date, arrival_date, stops}) => {
+const Ticket = ({ price, departure_time, arrival_time, origin, origin_name, destination, destination_name, departure_date, arrival_date, stops, currency}) => {
   return (
     <li className="ticket">
       <div className="col-left">
         <img src={window.location.origin + '/img/aviasales.png'} width="120" height="35" alt="Aviasales logo"/>
-        <a className="ticket__link" href="#">Купить за {price} ​₽</a>
+        <a className="ticket__link" href="#">Купить за<br /> {price} ​{ currency === 'RUB' ? '₽' : currency === 'EUR' ?  '€' : '$'}</a>
       </div>
       <div className="col-right">
         <div className="meta">

@@ -5,7 +5,7 @@ import Ticket from '../ticket/Ticket';
 
 import './TicketsList.scss';
 
-const TicketsList = ({ tickets }) => {
+const TicketsList = ({ tickets, currency }) => {
 
   const compare = (a, b) => {
     if (a.price < b.price) {
@@ -20,12 +20,24 @@ const TicketsList = ({ tickets }) => {
     <ul className="tickets-list">
       {
         tickets.sort(compare)
-          .map((ticket, i) => (
-            <Ticket
-              key={i}
-              { ...ticket }
-            />
-          ))
+          .map((ticket, i) => {
+            if (currency === 'EUR') {
+              const newPrice = Math.round(ticket.price / 73);
+              ticket = { ...ticket, price: newPrice }
+            } else if (currency === 'USD') {
+              const newPrice = Math.round(ticket.price / 64);
+              ticket = { ...ticket, price: newPrice };
+            }
+
+            return  (
+              <Ticket
+                key={i}
+                { ...ticket }
+                currency={currency}
+              />
+            )
+          }
+          )
       }
     </ul>
   )
@@ -33,10 +45,12 @@ const TicketsList = ({ tickets }) => {
 
 TicketsList.propTypes = {
   tickets: PropTypes.array,
+  currencyRate: PropTypes.object,
 }
 
 TicketsList.defaultProps = {
   tickets: [],
+  currencyRate: {},
 }
 
 export default TicketsList;
